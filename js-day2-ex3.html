@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Petersen JavaScript Hand-in 1 Ex 3</title>
+    <title>js-day2-ex3</title>
 </head>
 <body>
-    
+    <h1>Name List</h1>
+
+    <ul id="nameList"></ul>
+
+    <form id="nameForm">
+        <input type="text" id="newName" placeholder="Enter a name">
+        <input type="submit" value="Add Name">
+    </form>
+
+    <button id="removeFirst">Remove First</button>
+    <button id="removeLast">Remove Last</button>
+
+    <script>
+        const names = ["Mark", "Jonathan", "Rasmus", "Nikolai"];
+        const nameForm = document.getElementById("nameForm");
+        const newNameInput = document.getElementById("newName");
+        const ul = document.getElementById("nameList");
+        const removeFirstButton = document.getElementById("removeFirst");
+        const removeLastButton = document.getElementById("removeLast");
+
+        function createList() {
+            ul.innerHTML = ""; // Clear existing list
+            names.forEach(name => {
+                const li = document.createElement("li");
+                li.textContent = name; // Use textContext to prevent XSS
+                ul.appendChild(li);
+            });
+        }
+
+        createList(); // Call the function to initially populate the list
+
+        nameForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting to the server
+            const newName = newNameInput.value;
+            names.push(newName);
+            createList(); // Regenerate the UL
+            newNameInput.value = ""; // Clear the input field
+        });
+
+        removeFirstButton.addEventListener("click", function() {
+            if (names.length > 0) {
+                names.shift(); // Remove the first name
+                createList(); // Regenerate the UL
+            }
+        });
+
+        removeLastButton.addEventListener("click", function() {
+            if (names.length > 0) {
+                names.pop(); // Remove the last name
+                createList(); // Regenerate the UL
+            }
+        });
+    </script>
 </body>
 </html>
