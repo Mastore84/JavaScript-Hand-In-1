@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Petersen JavaScript Hand-in 1 Ex 4</title>
+  <title>js-day2-ex4</title>
 </head>
 <body>
-    
+
+<select id="car-selector"></select>
+
+<h2>Selected Brand</h2>
+<h4 id="car-make"></h4>
+
+<script>
+const cars = ["Ford", "VW", "Toyota", "Volvo"];
+
+const carSelector = document.getElementById("car-selector");
+
+const carMake = document.getElementById("car-make");
+
+function populateSelect() {
+  for (let i = 0; i < cars.length; i++) {
+    const option = document.createElement("option");
+    option.text = cars[i];
+    carSelector.appendChild(option);
+  }
+}
+
+function updateCarMake() {
+  const selectedValue = carSelector.value;
+  carMake.textContent = "Selected Brand: " + selectedValue;
+}
+
+populateSelect();
+
+carSelector.addEventListener("change", updateCarMake);
+</script>
+
 </body>
 </html>
