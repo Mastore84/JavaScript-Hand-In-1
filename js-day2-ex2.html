@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Petersen JavaScript Hand-in 1 Ex 2</title>
+    <style>
+        .my-div { width: 25px; height: 25px; background-color: red; margin: 1px; }
+    </style>
+    <title>js-day2-ex2</title>
 </head>
 <body>
-    
+    <!--<div id="div1" class="my-div"></div>
+    <div id="div2" class="my-div"></div>-->
+
+    <script>
+        // a)
+        function clickHandler(e) {
+            const idOfTheDiv = e.target.id;
+            console.log("Hi from " + idOfTheDiv);
+        }
+        
+        //document.getElementById('div1').addEventListener('click', clickHandler);
+        //document.getElementById('div2').addEventListener('click', clickHandler);
+
+        // b)
+        const outerDiv = document.createElement('div');
+        outerDiv.id = 'outer';
+
+        for (let i = 1; i <= 12; i++) {
+            const div = document.createElement('div');
+            div.id = 'div' + i;
+            div.className = 'my-div';
+            outerDiv.appendChild(div);
+        }
+
+        document.body.appendChild(outerDiv);
+
+        // Event bubbling
+        outerDiv.addEventListener('click', function (e) {
+            if (e.target && e.target.nodeName == 'DIV') {
+                const idOfTheDiv = e.target.id;
+                console.log("Hi from " + idOfTheDiv);
+            }
+        });
+
+        // c)
+        const paragraph = document.createElement('p');
+        paragraph.id = 'output-paragraph';
+        document.body.appendChild(paragraph);
+
+        outerDiv.addEventListener('click', function (e) {
+            if (e.target && e.target.nodeName == 'DIV') {
+                const idOfTheDiv = e.target.id;
+                const outputParagraph = document.getElementById('output-paragraph');
+                outputParagraph.innerText = "Hi from " + idOfTheDiv;
+            }
+        });
+    </script>
 </body>
 </html>
