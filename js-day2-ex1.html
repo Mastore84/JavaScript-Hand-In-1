@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>js-day2-ex1</title>
 </head>
 <body>
-    
+  <div id="d1" style="width: 200px; height: 100px; margin: 5px;">&nbsp;</div>
+  <div id="d2" style="width: 200px; height: 100px; margin: 5px;">&nbsp;</div>
+  <div id="d3" style="width: 200px; height: 100px; margin: 5px;">&nbsp;</div>
+
+  <button id="changeColoursButton">Skift Farver</button>
+
+  <script>
+    // Henter alle div elementer
+    const divs = document.querySelectorAll("div");
+
+    // Genererer vilkårlige farver
+    function getRandomColour() {
+      const letters = "0123456789ABCDEF";
+      let colour = "#";
+      for (let i = 0; i < 6; i++) {
+        colour += letters[Math.floor(Math.random() * 16)];
+      }
+      return colour;
+    }
+
+    // Sætter hver div til en tilfældig farve
+    function setUniqueColours() {
+      divs.forEach((div, index) => {
+        div.style.backgroundColor = getRandomColour();
+      });
+    }
+
+    // Event listener føjet til knappen
+    const button = document.getElementById("changeColoursButton");
+    button.addEventListener("click", setUniqueColours);
+
+    // Fastsætter unikke farver først
+    setUniqueColours();
+  </script>
 </body>
 </html>
